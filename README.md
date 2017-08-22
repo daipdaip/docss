@@ -3,14 +3,14 @@ DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](
 自分のような1人でコーディングをする、**比較的小規模なサイト**制作時のルールです。
 
 ## 基本ルール
-*レイヤーは**Base**、**Layout**、**PageBlock**、**Module**、**Component**、**Utility**で構成
-*下位レイヤーが上位レイヤーを上書きすることは禁止します。逆に上位レイヤーは下位レイヤーを上書きできます。
-*IDはLayout、javascriptのみ使用可能、**javascriptの場合スタイルは当てない**
-*SassやPostcssのネストは極力**1つ**まで
-*Sass等でファイルを分ける場合はレイヤーごとに分ける
-*レイヤーにはプレフィックスをつける
-*基本的に全部にクラスを付けるが、最下位層の要素に関してはクラスは不要とする
-*ルールは厳格に守ろうとせず、難しい場合は諦める事も必要
+* レイヤーは**Base**、**Layout**、**PageBlock**、**Module**、**Component**、**Utility**で構成
+* 下位レイヤーが上位レイヤーを上書きすることは禁止します。逆に上位レイヤーは下位レイヤーを上書きできます。
+* IDはLayout、javascriptのみ使用可能、**javascriptの場合スタイルは当てない**
+* SassやPostcssのネストは極力**1つ**まで
+* Sass等でファイルを分ける場合はレイヤーごとに分ける
+* レイヤーにはプレフィックスをつける
+* 基本的に全部にクラスを付けるが、最下位層の要素に関してはクラスは不要とする
+* ルールは厳格に守ろうとせず、難しい場合は諦める事も必要
 
 ## 命名規則
 FLOCSSの命名規則のように[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用し、ElementのElementはキャメルケースで記述します。
