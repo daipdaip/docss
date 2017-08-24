@@ -1,10 +1,10 @@
 # DOCSS（仮）
-DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](https://smacss.com/ja)、[BEM](http://bem.info/)の基本的な考え方を参考に[FLOCSS](https://github.com/hiloki/flocss)に大きな影響を受けたCSSのコーディングルールです。
+DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](https://smacss.com/ja)、[BEM](http://bem.info/)の基本的な考え方を参考に[FLOCSS](https://github.com/hiloki/flocss)に大きな影響を受けたCSSのコーディングルールです。  
 自分のような1人でコーディングをする、**比較的小規模なサイト**制作時のルールです。
 
 ## 基本ルール
 * レイヤーは**Base**、**Layout**、**PageBlock**、**Module**、**Component**、**Utility**で構成
-* 下位レイヤーが上位レイヤーを上書きすることは禁止します。逆に上位レイヤーは下位レイヤーを上書きできます。
+* 下位レイヤーが上位レイヤーを上書きすることは禁止します
 * IDはLayout、javascriptのみ使用可能、**javascriptの場合スタイルは当てない**
 * SassやPostcssのネストは極力**1つ**まで
 * Sass等でファイルを分ける場合はレイヤーごとに分ける
@@ -13,10 +13,10 @@ DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](
 * ルールは厳格に守ろうとせず、難しい場合は諦める事も必要
 
 ## 命名規則
-FLOCSSの命名規則のように[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用し、ElementのElementはキャメルケースで記述します。
-Stateパターンの命名もFLOCSSのようにjavascriptでの状態変化を表したい時に`is-`プレフィックスで記述します。
-ただし、javascript以外、Modifierとしては使用しません。
-ElementｎElementは**3つ**までとし、それ以降はプレフィックスを付けない新しいクラスを当ててそこからElementを続けていきます。
+FLOCSSの命名規則のように[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用し、ElementのElementはキャメルケースで記述します。  
+Stateパターンの命名もFLOCSSのようにjavascriptでの状態変化を表したい時に`is-`プレフィックスで記述します。  
+ただし、javascript以外、Modifierとしては使用しません。  
+ElementｎElementは**3つ**までとし、それ以降はプレフィックスを付けない新しいクラスを当ててそこからElementを続けていきます。  
 
     /* HTML */
     <div class="cm-block">
@@ -48,15 +48,15 @@ ElementｎElementは**3つ**までとし、それ以降はプレフィックス�
 
 ## レイヤー
 ### Base
-`Reset.css`や`Normalize.css`を使用し、サイトのスタイルの基礎部分を構築します。
-サイトによって変化はほとんどなく、ベースとなる背景色・文字色・フォントの種類等を変更します。
+`Reset.css`や`Normalize.css`を使用し、サイトのスタイルの基礎部分を構築します。  
+制作するサイトによって変更する部分はベースとなる背景色・文字色・フォントの種類等になります。
 
 ### Layout
-ヘッダーやフッター等、ページ全体の共通レイアウトの大枠になる部分です。
-スタイルの記述は許可します。
-IDセレクタを使用しページ内で1つしかない要素として定義します。
-javascriptから直接参照することも出来ます。
-BEMでいうElementやModifierは禁止し、内包する要素を上書きすることも禁止します。
+ヘッダーやフッター等、ページ全体の共通レイアウトの大枠になる部分です。  
+スタイルの記述は許可します。  
+IDセレクタを使用しページ内で1つしかない要素として定義します。  
+javascriptから直接参照することも出来ます。  
+BEMでいうElementやModifierは禁止し、内包する要素を上書きすることも禁止します。  
 プレフィックスとして`l-`をつけます。
 
     #l-wrapper { ... }
@@ -69,11 +69,11 @@ BEMでいうElementやModifierは禁止し、内包する要素を上書きす�
 
 
 ### PageBlock
-ページ固有のブロックのスタイルを定義します。
-ページ共通のスタイルは後述のModuleで記述します。
+ページ固有のブロックのスタイルを定義します。  
+ページ共通のスタイルは後述のModuleで記述します。  
 プレフィックスとして`p-pageslug`とし、Elementで内包ブロックを記述します。
 
-例)トップページの場合
+例)トップページの場合  
 
     <div class="p-top">
         <div class="p-top__main">
@@ -86,15 +86,16 @@ BEMでいうElementやModifierは禁止し、内包する要素を上書きす�
         </div><!-- sub block -->
     </div>
 
-**PageのElementを上書きすることは禁止します**
+**PageBlock内での上書きは禁止します**  
 
     ☓ .p-top .p-top__main { ... }
 
 ### Module
-Moduleには2種類あります。
+Moduleには2種類あります。  
+Pageblockで上書きすることは許可します。
 
 #### PageModule
-ページ内で共通の要素を定義します。
+ページ内で共通の要素を定義します。  
 プレフィックスは`pm-pageslug`とし、Elementで内包要素を記述します。
 
 例)トップページの場合
@@ -111,7 +112,7 @@ Moduleには2種類あります。
     </div>
 
 #### CommonModule
-複数ページに共通の要素を定義します。
+複数ページに共通の要素を定義します。  
 プレフィックスは`cm-`とし、Elementで内包要素を記述します。
 
     <div class="cm-block">
@@ -122,12 +123,14 @@ Moduleには2種類あります。
     </div>
 
 ### Component
-最も小さい単位のパーツとしての要素です。
-プレフィックスは`c-`とし、Elementは禁止します。
-ボタンの色違いなどはModifierで対応することとします。
-ただし、幅や高さマージン等、限定的になる記述はせず、共通幅のボタンなどはCommonModuleで上書きするようにします。
+最も小さい単位のパーツとしての要素です。  
+プレフィックスは`c-`とし、Elementは禁止します。  
+ボタンの色違いなどはModifierで対応することとします。  
+ただし、幅や高さマージン等、限定的になる記述はせず、共通幅のボタンなどはCommonModuleやPageblockで上書きするようにします。
 
-    <button class="cm-btn c-btn c-btn--black"></button>
+    <div class="p-top__btn">
+        <button class="cm-btn c-btn c-btn--black"></button>
+    </div>
 
     /* Compornent */
     .c-btn { ... }
@@ -136,9 +139,13 @@ Moduleには2種類あります。
     /* CommonModule */
     .cm-btn { ... }
 
+    /* PageBlock */
+    .p-top__btn .c-btn { ... }
+
 ### Utility
-Compornentのようなパーツではなく、汎用的に使用するスタイルを記述する要素です。
-プレフィックスは`u-`とし、Elementは禁止します。
+Compornentのようなパーツではなく、汎用的に使用するスタイルを記述する要素です。  
+プレフィックスは`u-`とし、Elementは禁止します。  
+CommonModuleやPageblockでの上書きは許可します。
 
     .u-cf { ... } /* clearfix */
     .u-section { max-width: 1000px; width: 93.75%; margin: 0 auto; }
@@ -185,5 +192,5 @@ Compornentのようなパーツではなく、汎用的に使用するスタイ�
 
 
 ## 最後に
-ばーっと書いてみると色々直さなきゃいけない部分もある気がします。
+ばーっと書いてみると色々直さなきゃいけない部分もある気がします。  
 徐々に改善していきます。
