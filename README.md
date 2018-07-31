@@ -15,19 +15,19 @@ DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](
 ## 命名規則
 FLOCSSの命名規則のように[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用し、ElementのElementはキャメルケースで記述します。  
 Stateパターンの命名もFLOCSSのようにjavascriptでの状態変化を表したい時に`is-`プレフィックスで記述します。  
-ただし、javascript以外、Modifierとしては使用しません。  
-ElementｎElementは**3つ**までとし、それ以降はプレフィックスを付けない新しいクラスを当ててそこからElementを続けていきます。  
+ただし、javascript以外、**Modifierとしても使用します。**(--が冗長なのが否めないため)
+ElementｎElementは**2つ**までとし、それ以降はプレフィックスを付けない新しいクラスを当ててそこからElementを続けていきます。  
 
     /* HTML */
     <div class="cm-block">
         <div class="cm-block__el">
             <div class="cm-block__elEl">
                 <div class="cm-block__elElEl">
-                    <dl class="m-block__elElElEl">
-                        <dt class="title">...</dt>
-                        <dd class="body">
-                            <p class="body__txt">
-                                <span class="body__txtTxt"></span>
+                    <dl class="block">
+                        <dt class="block__title">...</dt>
+                        <dd class="block__body">
+                            <p class="block__bodyEl">
+                                <span class="block__bodyElEl"></span>
                             </p>
                         </dd>
                     </dl>
@@ -41,10 +41,10 @@ ElementｎElementは**3つ**までとし、それ以降はプレフィックス�
     .cm-block__el { ... }
     .cm-block__elEl { ... }
     .cm-block__elElEl { ... }
-    .cm-block__elElElEl { ... }
-    .cm-block__elElElEl .title { ... }
-    .cm-block__elElElEl .body__txt { ... }
-    .cm-block__elElElEl .body__txtTxt { ... }
+    .cm-block__elElEl .block { ... }
+    .cm-block__elElEl .block__title { ... }
+    .cm-block__elElEl .block__bodyEl { ... }
+    .cm-block__elElEl .block__bodyElEl { ... }
 
 ## レイヤー
 ### Base
@@ -124,20 +124,17 @@ Pageblockで上書きすることは許可します。
 
 ### Component
 最も小さい単位のパーツとしての要素です。  
-プレフィックスは`c-`とし、Elementは禁止します。  
+プレフィックスは`c-`とします。  
 ボタンの色違いなどはModifierで対応することとします。  
 ただし、幅や高さマージン等、限定的になる記述はせず、共通幅のボタンなどはCommonModuleやPageblockで上書きするようにします。
 
     <div class="p-top__btn">
-        <button class="cm-btn c-btn c-btn--black"></button>
+        <button class="c-btn is-green"></button>
     </div>
 
     /* Compornent */
     .c-btn { ... }
-    .c-btn--green { ... }
-
-    /* CommonModule */
-    .cm-btn { ... }
+    .c-btn.is-green { ... }
 
     /* PageBlock */
     .p-top__btn .c-btn { ... }
@@ -149,27 +146,27 @@ CommonModuleやPageblockでの上書きは許可します。
 
     .u-cf { ... } /* clearfix */
     .u-section { max-width: 1000px; width: 93.75%; margin: 0 auto; }
-    .u-section--wide { max-width: 1280px; }
+    .u-section.is-wide { max-width: 1280px; }
 
 
 ## PageBlockやModuleのModifier
 
     <div class="p-top__block">
-        <div class="p-top__blockItem p-top__blockItem--01">
+        <div class="p-top__blockItem is-01">
         </div>
-        <div class="p-top__blockItem p-top__blockItem--02">
+        <div class="p-top__blockItem is-02">
         </div>
-        <div class="p-top__blockItem p-top__blockItem--03">
+        <div class="p-top__blockItem is-03">
         </div>
-        <div class="p-top__blockItem p-top__blockItem--04">
+        <div class="p-top__blockItem is-04">
         </div>
     </div>
 
     .p-top__blockItem { ... }
-    .p-top__blockItem--01 { ... }
-    .p-top__blockItem--02 { ... }
-    .p-top__blockItem--03 { ... }
-    .p-top__blockItem--04 { ... }
+    .p-top__blockItem.is-01 { ... }
+    .p-top__blockItem.is-02 { ... }
+    .p-top__blockItem.is-03 { ... }
+    .p-top__blockItem.is-04 { ... }
 
 上記のように連番でModifierを使用する場合等、Modifierがあまり意味を持たない場合はModifierを使わずに出来るだけCSSのセレクタを使うようにします
 
