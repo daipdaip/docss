@@ -122,8 +122,8 @@ Pageblockで上書きすることは許可します。
         </div>
     </div>
 
-CommonModuleがPageModuleを上書きすることは禁止です。
-CommonModuleやPageModuleがPageBlockを上書きすることは禁止です。
+CommonModuleがPageModuleを上書きすることは禁止です。  
+CommonModuleやPageModuleがPageBlockを上書きすることは禁止です。  
 PageModuleがCommonModuleを上書きすることは許容します。
 
     ☓ .cm-block .pm-top__block { ... }
