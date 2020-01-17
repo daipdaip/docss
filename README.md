@@ -1,5 +1,5 @@
-# DOCSS（仮）
-DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](https://smacss.com/ja)、[BEM](http://bem.info/)の基本的な考え方を参考に[FLOCSS](https://github.com/hiloki/flocss)に大きな影響を受けたCSSのコーディングルールです。  
+# DOCSS
+DOCSSは[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](https://smacss.com/ja)、[BEM](http://bem.info/)の基本的な考え方を参考に[FLOCSS](https://github.com/hiloki/flocss)に大きな影響を受けたCSSのコーディングルールです。  
 自分のような1人でコーディングをする、**比較的小規模なサイト**制作時のルールです。
 
 ## 基本ルール
