@@ -6,7 +6,7 @@ DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](
 * レイヤーは**Base**、**Layout**、**PageBlock**、**Module**、**Component**、**Utility**で構成
 * 下位レイヤーが上位レイヤーを上書きすることは禁止します
 * IDはLayout、javascriptのみ使用可能、**javascriptの場合スタイルは当てない**
-* SassやPostcssのネストは極力**1つ**まで
+* SassやPostcssのネストは極力**2つ**まで
 * Sass等でファイルを分ける場合はレイヤーごとに分ける
 * レイヤーにはプレフィックスをつける
 * 基本的に全部にクラスを付けるが、最下位層の要素に関してはクラスは不要とする
@@ -15,8 +15,8 @@ DOCSS（仮）は[OOCSS](https://github.com/stubbornella/oocss/wiki)、[SMACSS](
 ## 命名規則
 FLOCSSの命名規則のように[MindBEMding](https://csswizardry.com/2013/01/mindbemding-getting-your-head-round-bem-syntax/)を採用し、ElementのElementはキャメルケースで記述します。  
 Stateパターンの命名もFLOCSSのようにjavascriptでの状態変化を表したい時に`is-`プレフィックスで記述します。  
-ただし、javascript以外、**Modifierとしても使用します。**(--が冗長なのが否めないため)
-ElementｎElementは**2つ**までとし、それ以降はプレフィックスを付けない新しいクラスを当ててそこからElementを続けていきます。  
+ただし、javascript以外、**Modifierとしても使用します。**(--が冗長なのが否めないため)  
+ElementのElementは**2つ**までとし、それ以降はプレフィックスを付けない新しいクラスを当ててそこからElementを続けていきます。  
 
     /* HTML */
     <div class="cm-block">
@@ -48,7 +48,7 @@ ElementｎElementは**2つ**までとし、それ以降はプレフィックス�
 
 ## レイヤー
 ### Base
-`Reset.css`や`Normalize.css`を使用し、サイトのスタイルの基礎部分を構築します。  
+`Reset.css`や`Normalize.css`を使用し、サイトのスタイルの基礎部分を構築します。(自分は普段は`ress.css`を使っています)  
 制作するサイトによって変更する部分はベースとなる背景色・文字色・フォントの種類等になります。
 
 ### Layout
@@ -56,7 +56,7 @@ ElementｎElementは**2つ**までとし、それ以降はプレフィックス�
 スタイルの記述は許可します。  
 IDセレクタを使用しページ内で1つしかない要素として定義します。  
 javascriptから直接参照することも出来ます。  
-BEMでいうElementやModifierは禁止し、内包する要素を上書きすることも禁止します。  
+BEMでいうElementやModifierは禁止し、**内包する要素を上書きすることも禁止**します。  
 プレフィックスとして`l-`をつけます。
 
     #l-wrapper { ... }
@@ -122,11 +122,21 @@ Pageblockで上書きすることは許可します。
         </div>
     </div>
 
+CommonModuleがPageModuleを上書きすることは禁止です。
+CommonModuleやPageModuleがPageBlockを上書きすることは禁止です。
+PageModuleがCommonModuleを上書きすることは許容します。
+
+    ☓ .cm-block .pm-top__block { ... }
+    ☓ .cm-block .p-top__main { ... }
+    ☓ .pm-top__block .p-top__main { ... }
+    ○ .pm-top__block .cm-block { ... }
+
 ### Component
 最も小さい単位のパーツとしての要素です。  
 プレフィックスは`c-`とします。  
 ボタンの色違いなどはModifierで対応することとします。  
-ただし、幅や高さマージン等、限定的になる記述はせず、共通幅のボタンなどはCommonModuleやPageblockで上書きするようにします。
+ただし、幅や高さマージン等、限定的になる記述はせず、共通幅のボタンなどはCommonModuleやPageblockで上書きするようにします。  
+(幅や高さも全体で共通であればここで指定しても良いです)
 
     <div class="p-top__btn">
         <button class="c-btn is-green"></button>
@@ -147,6 +157,9 @@ CommonModuleやPageblockでの上書きは許可します。
     .u-cf { ... } /* clearfix */
     .u-section { max-width: 1000px; width: 93.75%; margin: 0 auto; }
     .u-section.is-wide { max-width: 1280px; }
+
+    ☓ .u-section__body { ... }
+    ☓ .u-section .el { ... }
 
 
 ## PageBlockやModuleのModifier
@@ -186,6 +199,13 @@ CommonModuleやPageblockでの上書きは許可します。
     .p-top__blockItem:nth-child(2) { ... }
     .p-top__blockItem:nth-child(3) { ... }
     .p-top__blockItem:nth-child(4) { ... }
+
+
+## javascript
+javascriptで参照する場合は`js-`プレフィックスを付けます。
+基本はIDで記述します。
+
+    <div class="el" id="js-el">
 
 
 ## 最後に
